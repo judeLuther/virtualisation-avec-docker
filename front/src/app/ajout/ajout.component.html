@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajouter une Personne</title>
+</head>
+<body>
+    <div class="container">
+        <div class="content-header">
+            <h1>Ajouter une Personne</h1>
+            <button routerLink="/" id="backButton">Retour</button>
+        </div>
+        <form [formGroup]="addPersonForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="nom">Nom:</label>
+                <input type="text" id="nom" formControlName="nom" required>
+            </div>
+            <div class="form-group">
+                <label for="prenom">Prenom:</label>
+                <input type="text" id="prenom" formControlName="prenom" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" formControlName="email" required>
+                <small>Vous pouvez cliquer sur ce bouton pour ajouter des champs pour l'entreprise et la ville</small>
+                <button type="button" (click)="addFields()" class="small-button">Ajouter des champs</button>
+            </div>
+            <div formArrayName="proprietes" *ngFor="let field of proprietes.controls; let i=index">
+                <div [formGroupName]="i" class="extra-fields">
+                    <div class="form-group">
+                        <label for="entreprise">Entreprise:</label>
+                        <input type="text" formControlName="entreprise">
+                    </div>
+                    <div class="form-group">
+                        <label for="ville">Ville:</label>
+                        <input type="text" formControlName="administration">
+                    </div>
+                    <button type="button" (click)="removeFields(i)" class="small-button remove-button">Supprimer</button>
+                </div>
+            </div>
+            <button type="submit">Ajouter</button>
+        </form>
+    </div>
+    
+</body>
+</html>

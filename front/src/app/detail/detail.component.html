@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Détails de la Personne</title>
+</head>
+<body>
+    <div class="container">
+        <div class="person-details">
+            <div class="content-header">
+                <h1>Détails de la Personne</h1>
+                <button routerLink="/" id="backButton">Retour</button>
+            </div>
+            <div *ngIf="!editMode">
+                <h3>{{ person.nom }} {{ person.prenom }}</h3>
+                <p><strong>Email:</strong> <span>{{ person.email }}</span></p>
+                <div *ngFor="let propriete of person.proprietes">
+                    <p><strong>Entreprise:</strong> <span>{{ propriete.entreprise }}</span></p>
+                    <p><strong>Administration:</strong> <span>{{ propriete.administration }}</span></p>
+                </div>
+                <button (click)="enableEditMode()">Modifier</button>
+                <button class="button-delete" (click)="deleteContact()">Supprimer</button>
+            </div>
+            <div *ngIf="editMode">
+                <label>Nom:</label>
+                <input type="text" [(ngModel)]="person.nom" />
+                <label>Prenom:</label>
+                <input type="text" [(ngModel)]="person.prenom" />
+                <label>Email:</label>
+                <input type="email" [(ngModel)]="person.email" />
+              
+                <div *ngFor="let propriete of person.proprietes; let i=index">
+                  <label>Entreprise {{ i + 1 }}:</label>
+                  <input type="text" [(ngModel)]="propriete.entreprise" />
+                  <label>Administration {{ i + 1 }}:</label>
+                  <input type="text" [(ngModel)]="propriete.administration" />
+                </div>
+              
+                <button class="button-add" (click)="addPropriete()">Ajouter une propriété</button>
+                <button (click)="updateContact()">Enregistrer</button>
+                <button class="button-clear" (click)="disableEditMode()">Annuler</button>
+              </div>
+        </div>
+    </div>
+     
+</body>
+</html>

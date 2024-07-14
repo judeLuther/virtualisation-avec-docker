@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La liste des Personnes</title>
+</head>
+<body>
+    <div class="container">
+        <div class="content-header">
+            <h1>La liste des Personnes</h1>
+            <button routerLink="/ajout" id="btn-add">Ajouter un contact</button>
+        </div>
+        <form [formGroup]="filterForm" (ngSubmit)="applyFilter()">
+            <div class="filter-container">
+                <input formControlName="nom" type="text" id="filterInput" placeholder="Nom (optionel)">
+                <input formControlName="prenom" type="text" id="filterInput" placeholder="Prénom (optionel)">
+                <input formControlName="email" type="email" id="filterInput" placeholder="E-mail (optionel)">
+                <input formControlName="entrprise" type="text" id="filterInput" placeholder="Entreprise (optionel)">
+                <input formControlName="administration" type="text" id="filterInput" placeholder="Ville (optionel)">
+                <button type="submit" id="btn-filter">Filtrer</button>
+                <button (click)="clearFilter()" type="reset" id="btn-clear">Effacer</button>
+            </div>
+        </form>
+       
+        <table id="personTable">
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>e-mail</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let contact of contacts" [routerLink]="['/detail', contact._id]">
+                    <td>{{contact.nom}}</td>
+                    <td>{{contact.prenom}}</td>
+                    <td>{{contact.email}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
